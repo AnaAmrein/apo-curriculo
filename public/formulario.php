@@ -1,211 +1,161 @@
-<?php
-// formulário para gerar currículo profissional
-?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Currículo Profissional</title>
+  <title>Preencher Currículo</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
-    body {
-      background: #f5f6fa;
-      font-family: "Segoe UI", sans-serif;
-    }
-    .container {
-      max-width: 900px;
-      margin-top: 40px;
-      margin-bottom: 60px;
-    }
-    .card {
-      border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      padding: 30px;
-      margin-bottom: 30px;
-      background: white;
-    }
-    h2 {
-      text-align: center;
-      color: #0d6efd;
-      font-weight: 700;
-      margin-bottom: 25px;
-    }
-    h4 {
-      color: #0d6efd;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-    .btn-outline-primary, .btn-success {
-      border-radius: 8px;
-    }
-    .btn-outline-primary:hover {
-      background-color: #0d6efd;
-      color: white;
-    }
-    .btn-success {
-      background-color: #0d6efd;
-      border: none;
-    }
-    .btn-success:hover {
-      background-color: #0b5ed7;
-    }
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 40px;
-    }
-  </style>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
-  <div class="container">
-    <h2><i class="bi bi-file-earmark-person"></i> Gerador de Currículo Profissional</h2>
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-primary">Preencha suas informações</h1>
+      <p class="text-muted">Complete seus dados e gere seu currículo profissional.</p>
+    </div>
 
-    <form action="generate.php" method="POST">
-
-      <!-- Dados Pessoais -->
-      <div class="card">
-        <h4><i class="bi bi-person-lines-fill"></i> Dados Pessoais</h4>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label>Nome completo:</label>
-            <input type="text" name="nome" class="form-control" required>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Data de nascimento:</label>
-            <input type="date" id="nascimento" name="nascimento" class="form-control">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Idade:</label>
-            <input type="text" id="idade" name="idade" class="form-control" readonly>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label>Endereço:</label>
-            <input type="text" name="endereco" class="form-control">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>Telefone:</label>
-            <input type="text" name="telefone" class="form-control">
-          </div>
-          <div class="col-md-3 mb-3">
-            <label>E-mail:</label>
-            <input type="email" name="email" class="form-control">
+    <form id="curriculoForm" action="gerar.php" method="post" class="mx-auto" style="max-width: 800px;">
+      <!-- DADOS PESSOAIS -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+          <h5 class="fw-bold text-secondary mb-3">Dados Pessoais</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Nome completo</label>
+              <input type="text" name="nome" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">E-mail</label>
+              <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Data de nascimento</label>
+              <input type="date" name="data_nasc" id="data_nasc" class="form-control" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Idade</label>
+              <input type="text" id="idade" name="idade" class="form-control" readonly>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Telefone</label>
+              <input type="text" name="telefone" class="form-control" placeholder="(00) 00000-0000">
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Resumo Profissional -->
-      <div class="card">
-        <h4><i class="bi bi-chat-left-text-fill"></i> Resumo Profissional / Objetivo</h4>
-        <textarea name="resumo" class="form-control" rows="4" placeholder="Ex: Profissional dedicada com experiência em confecção e gestão de equipes. Busco oportunidade para aplicar meus conhecimentos e crescer profissionalmente."></textarea>
+      <!-- FORMAÇÃO ACADÊMICA -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-secondary m-0">Formação Acadêmica</h5>
+            <button type="button" id="addFormacao" class="btn btn-sm btn-outline-primary">+ Adicionar</button>
+          </div>
+          <div id="formacoes"></div>
+        </div>
       </div>
 
-      <!-- Formação -->
-      <div class="card">
-        <h4><i class="bi bi-mortarboard-fill"></i> Formação Acadêmica</h4>
-        <div id="formacoes"></div>
-        <button type="button" class="btn btn-outline-primary mt-2" id="addFormacao">
-          <i class="bi bi-plus-circle"></i> Adicionar Formação
-        </button>
+      <!-- EXPERIÊNCIAS PROFISSIONAIS -->
+      <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="fw-bold text-secondary m-0">Experiência Profissional</h5>
+            <button type="button" id="addExp" class="btn btn-sm btn-outline-primary">+ Adicionar</button>
+          </div>
+          <div id="experiencias"></div>
+        </div>
       </div>
 
-      <!-- Experiências -->
-      <div class="card">
-        <h4><i class="bi bi-briefcase-fill"></i> Experiências Profissionais</h4>
-        <div id="experiencias"></div>
-        <button type="button" class="btn btn-outline-primary mt-2" id="addExperiencia">
-          <i class="bi bi-plus-circle"></i> Adicionar Experiência
-        </button>
-      </div>
-
-      <!-- Referências -->
-      <div class="card">
-        <h4><i class="bi bi-people-fill"></i> Referências Pessoais</h4>
-        <div id="referencias"></div>
-        <button type="button" class="btn btn-outline-primary mt-2" id="addReferencia">
-          <i class="bi bi-plus-circle"></i> Adicionar Referência
-        </button>
-      </div>
-
-      <div class="text-center mt-4">
-        <button type="submit" class="btn btn-success btn-lg px-4">
-          <i class="bi bi-check-circle"></i> Gerar Currículo
-        </button>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg px-4">Gerar Currículo</button>
       </div>
     </form>
-
-    <footer>
-      Desenvolvido para o projeto de programação web | <strong>EnxovalApp</strong>
-    </footer>
   </div>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Templates ocultos -->
+  <template id="templateFormacao">
+    <div class="border p-3 rounded mb-3 bg-white">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input type="text" name="curso[]" class="form-control" placeholder="Curso" required>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="instituicao[]" class="form-control" placeholder="Instituição" required>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="ano_conclusao[]" class="form-control" placeholder="Ano de conclusão">
+        </div>
+        <div class="col-md-6 text-end">
+          <button type="button" class="btn btn-sm btn-outline-danger remover">Remover</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="templateExperiencia">
+    <div class="border p-3 rounded mb-3 bg-white">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <input type="text" name="empresa[]" class="form-control" placeholder="Empresa" required>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="cargo[]" class="form-control" placeholder="Cargo" required>
+        </div>
+        <div class="col-md-6">
+          <input type="text" name="periodo[]" class="form-control" placeholder="Período (Ex: 2022 - 2024)">
+        </div>
+        <div class="col-md-6 text-end">
+          <button type="button" class="btn btn-sm btn-outline-danger remover">Remover</button>
+        </div>
+        <div class="col-12">
+          <textarea name="descricao[]" class="form-control" rows="2" placeholder="Descrição das atividades"></textarea>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script>
-    // Calcula idade automaticamente
-    $('#nascimento').on('change', function(){
-      const nasc = new Date(this.value);
+    // Cálculo automático da idade
+    $('#data_nasc').on('change', function() {
+      const data = new Date(this.value);
       const hoje = new Date();
-      let idade = hoje.getFullYear() - nasc.getFullYear();
-      const m = hoje.getMonth() - nasc.getMonth();
-      if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+      let idade = hoje.getFullYear() - data.getFullYear();
+      const m = hoje.getMonth() - data.getMonth();
+      if (m < 0 || (m === 0 && hoje.getDate() < data.getDate())) idade--;
       $('#idade').val(idade);
     });
 
-    // Adicionar formação
-    $('#addFormacao').click(function(){
-      $('#formacoes').append(`
-        <div class="border p-3 mb-3 rounded">
-          <label>Curso:</label>
-          <input type="text" name="curso[]" class="form-control mb-2" required>
-          <label>Instituição:</label>
-          <input type="text" name="instituicao[]" class="form-control mb-2" required>
-          <label>Ano de Conclusão:</label>
-          <input type="text" name="ano_conclusao[]" class="form-control mb-2">
-          <button type="button" class="btn btn-sm btn-danger removerFormacao">Remover</button>
-        </div>
-      `);
+    // Adicionar e remover formações
+    $('#addFormacao').on('click', function() {
+      const tpl = $('#templateFormacao').html();
+      $('#formacoes').append(tpl);
     });
-    $(document).on('click', '.removerFormacao', function(){ $(this).closest('div.border').remove(); });
 
-    // Adicionar experiência
-    $('#addExperiencia').click(function(){
-      $('#experiencias').append(`
-        <div class="border p-3 mb-3 rounded">
-          <label>Empresa:</label>
-          <input type="text" name="empresa[]" class="form-control mb-2" required>
-          <label>Cargo:</label>
-          <input type="text" name="cargo[]" class="form-control mb-2" required>
-          <label>Período:</label>
-          <input type="text" name="periodo[]" class="form-control mb-2" placeholder="Ex: 2021 - 2024">
-          <label>Atividades desenvolvidas:</label>
-          <textarea name="atividades[]" class="form-control mb-2" rows="3" placeholder="Descreva suas principais atividades..."></textarea>
-          <button type="button" class="btn btn-sm btn-danger removerExp">Remover</button>
-        </div>
-      `);
+    // Adicionar e remover experiências
+    $('#addExp').on('click', function() {
+      const tpl = $('#templateExperiencia').html();
+      $('#experiencias').append(tpl);
     });
-    $(document).on('click', '.removerExp', function(){ $(this).closest('div.border').remove(); });
 
-    // Adicionar referência
-    $('#addReferencia').click(function(){
-      $('#referencias').append(`
-        <div class="border p-3 mb-3 rounded">
-          <label>Nome:</label>
-          <input type="text" name="ref_nome[]" class="form-control mb-2" required>
-          <label>Contato:</label>
-          <input type="text" name="ref_contato[]" class="form-control mb-2" placeholder="Telefone ou e-mail">
-          <button type="button" class="btn btn-sm btn-danger removerRef">Remover</button>
-        </div>
-      `);
+    // Remover blocos
+    $(document).on('click', '.remover', function() {
+      $(this).closest('.border').remove();
     });
-    $(document).on('click', '.removerRef', function(){ $(this).closest('div.border').remove(); });
+
+    // Adiciona um campo inicial de exemplo
+    $('#addFormacao').click();
+    $('#addExp').click();
   </script>
+
 </body>
 </html>
