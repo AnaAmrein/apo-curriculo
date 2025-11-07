@@ -33,3 +33,7 @@ p {
 input, textarea {
   border-radius: 0.5rem !important;
 }
+.header-info p {
+  margin: 0;
+  line-height: 1.6;
+}

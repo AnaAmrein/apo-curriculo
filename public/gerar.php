@@ -5,6 +5,7 @@ $email = $_POST['email'] ?? '';
 $data_nasc = $_POST['data_nasc'] ?? '';
 $idade = $_POST['idade'] ?? '';
 $telefone = $_POST['telefone'] ?? '';
+$endereco = $_POST['endereco'] ?? '';
 
 $cursos = $_POST['curso'] ?? [];
 $instituicoes = $_POST['instituicao'] ?? [];
@@ -14,13 +15,21 @@ $empresas = $_POST['empresa'] ?? [];
 $cargos = $_POST['cargo'] ?? [];
 $periodos = $_POST['periodo'] ?? [];
 $descricoes = $_POST['descricao'] ?? [];
+
+
+if (!empty($data_nasc)) {
+    $data_obj = new DateTime($data_nasc);
+    $data_nasc_br = $data_obj->format('d/m/Y');
+} else {
+    $data_nasc_br = '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Currículo de <?= htmlspecialchars($nome) ?></title>
+  <title>Currículo - <?= htmlspecialchars($nome) ?></title>
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,59 +37,103 @@ $descricoes = $_POST['descricao'] ?? [];
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="assets/css/style.css">
-
   <style>
-    @media print {
-      .no-print { display: none !important; }
-      body { background: white !important; }
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 40px;
+  }
 
+  .curriculo-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Cor principal ajustada */
+  h1 {
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0a3d62; /* Azul escuro elegante */
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0a3d62; /* Azul escuro consistente */
+    border-bottom: 2px solid #0a3d6220;
+    padding-bottom: 5px;
+    margin-top: 30px;
+  }
+
+  .dados-pessoais p {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .dados-pessoais {
+    margin-bottom: 20px;
+  }
+
+  .section-content p {
+    margin: 0;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; padding: 0; }
     .curriculo-container {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      padding: 40px;
-      max-width: 800px;
-      margin: 50px auto;
-    }
-
-    h2 {
-      color: #0d6efd;
-      font-weight: 700;
-      border-bottom: 2px solid #e9ecef;
-      padding-bottom: 5px;
-      margin-top: 30px;
-    }
-
-    .info-label {
-      font-weight: 600;
-      color: #333;
-    }
-
-    .section-content p {
-      margin: 0;
-      color: #555;
-    }
-
-    .header-info p {
+      box-shadow: none;
+      border: none;
       margin: 0;
     }
-  </style>
+  }
+
+  /* Ajuste nos botões */
+  .btn-primary {
+    background-color: #0a3d62;
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background-color: #083251;
+  }
+
+  .btn-outline-secondary {
+    color: #555;
+    border-color: #aaa;
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: #eee;
+  }
+</style>
+
 </head>
 
-<body class="bg-light">
-
+<body>
   <div class="curriculo-container">
-    <!-- CABEÇALHO -->
-    <div class="text-center mb-4">
-      <h1 class="fw-bold"><?= htmlspecialchars($nome) ?></h1>
-      <div class="header-info text-muted">
-        <p><?= htmlspecialchars($email) ?></p>
-        <p><?= htmlspecialchars($telefone) ?></p>
-        <p>Data de Nascimento: <?= htmlspecialchars($data_nasc) ?> (<?= htmlspecialchars($idade) ?> anos)</p>
-      </div>
+    <!-- TÍTULO -->
+    <h1>Currículo</h1>
+
+    <!-- DADOS PESSOAIS -->
+    <div class="dados-pessoais">
+      <p><strong>Nome:</strong> <?= htmlspecialchars($nome) ?></p>
+      <p><strong>E-mail:</strong> <?= htmlspecialchars($email) ?></p>
+      <p><strong>Telefone:</strong> <?= htmlspecialchars($telefone) ?></p>
+      <?php if (!empty($endereco)): ?>
+        <p><strong>Endereço:</strong> <?= htmlspecialchars($endereco) ?></p>
+      <?php endif; ?>
+      <p><strong>Data de Nascimento:</strong> <?= htmlspecialchars($data_nasc_br) ?> (<?= htmlspecialchars($idade) ?> anos)</p>
     </div>
 
     <!-- FORMAÇÃO ACADÊMICA -->
@@ -88,19 +141,23 @@ $descricoes = $_POST['descricao'] ?? [];
       <h2>Formação Acadêmica</h2>
       <div class="section-content">
         <?php for ($i = 0; $i < count($cursos); $i++): ?>
-          <p><span class="info-label"><?= htmlspecialchars($cursos[$i]) ?></span> — <?= htmlspecialchars($instituicoes[$i] ?? '') ?> <?= !empty($anos[$i]) ? "({$anos[$i]})" : '' ?></p>
+          <p>
+            <strong><?= htmlspecialchars($cursos[$i]) ?></strong> —
+            <?= htmlspecialchars($instituicoes[$i] ?? '') ?>
+            <?= !empty($anos[$i]) ? "({$anos[$i]})" : '' ?>
+          </p>
         <?php endfor; ?>
       </div>
     <?php endif; ?>
 
-    <!-- EXPERIÊNCIAS PROFISSIONAIS -->
+    <!-- EXPERIÊNCIA PROFISSIONAL -->
     <?php if (!empty($empresas)): ?>
       <h2>Experiência Profissional</h2>
       <div class="section-content">
         <?php for ($i = 0; $i < count($empresas); $i++): ?>
           <p>
-            <span class="info-label"><?= htmlspecialchars($empresas[$i]) ?></span> — 
-            <?= htmlspecialchars($cargos[$i] ?? '') ?> 
+            <strong><?= htmlspecialchars($empresas[$i]) ?></strong> —
+            <?= htmlspecialchars($cargos[$i] ?? '') ?>
             <?= !empty($periodos[$i]) ? "({$periodos[$i]})" : '' ?>
           </p>
           <?php if (!empty($descricoes[$i])): ?>
@@ -111,11 +168,10 @@ $descricoes = $_POST['descricao'] ?? [];
     <?php endif; ?>
 
     <!-- BOTÕES -->
-    <div class="text-center mt-5 no-print">
-      <button onclick="window.print()" class="btn btn-primary btn-lg px-4 me-2">Imprimir / Salvar PDF</button>
-      <a href="formulario.php" class="btn btn-outline-secondary btn-lg px-4">Voltar</a>
+    <div class="text-center mt-4 no-print">
+      <button onclick="window.print()" class="btn btn-primary btn-lg me-2">Imprimir / Salvar PDF</button>
+      <a href="formulario.php" class="btn btn-outline-secondary btn-lg">Voltar</a>
     </div>
   </div>
-
 </body>
 </html>
