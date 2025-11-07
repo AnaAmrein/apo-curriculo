@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head> 
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerador de Currículos Online</title>
+  <title>Gerador de Currículos Online</title>
 
-<!-- Bootstrap via CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstarap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- CSS próprio -->
-<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-light">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+<body>
+
+  <main class="d-flex flex-column justify-content-center align-items-center vh-100 text-center bg-light">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">Gerador de Currículos</a>
+      <h1 class="fw-bold text-primary display-5 mb-3">Gerador de Currículos Online</h1>
+      <p class="lead text-muted mb-4">Faça seu currículo de forma fácil e em minutos.</p>
+      <a href="formulario.php" class="btn btn-primary btn-lg px-4 py-2">Começar Agora</a>
     </div>
-  </nav>
-
-  <main class="container text-center mt-5">
-    <h1 class="display-5 fw-bold">Gerador de Currículos Online</h1>
-    <p class="lead mt-3 text-muted">
-      Faça seu currículo de forma fácil e em minutos.
-    </p>
-
-    <a href="formulario.php" class="btn btn-primary btn-lg mt-4">
-      Começar agora
-    </a>
   </main>
 
-  <!-- JS Bootstrap + Script próprio -->
+  <!-- JS Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/script.js"></script>
 </body>
 </html>
