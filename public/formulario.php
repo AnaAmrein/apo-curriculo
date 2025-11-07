@@ -48,6 +48,11 @@
               <label class="form-label">Telefone</label>
               <input type="text" name="telefone" class="form-control" placeholder="(00) 00000-0000">
             </div>
+            <div class="col-md-12">
+              <label class="form-label">Endereço completo</label>
+              <input type="text" name="endereco" class="form-control" placeholder="Rua, número, bairro, cidade, estado" required>
+            </div>
+
           </div>
         </div>
       </div>
