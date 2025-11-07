@@ -1,0 +1,41 @@
+/* Estilo geral para o currículo */
+body {
+    background-color: #f9fafb;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #333;
+}
+
+.container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+h1, h3 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+hr {
+    border-top: 2px solid #ccc;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.btn {
+    border-radius: 8px;
+}
