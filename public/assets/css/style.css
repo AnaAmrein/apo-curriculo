@@ -25,3 +25,11 @@ p {
   background-color: #0b5ed7;
   transform: translateY(-2px);
 }
+
+.card {
+  border-radius: 1rem;
+}
+
+input, textarea {
+  border-radius: 0.5rem !important;
+}
